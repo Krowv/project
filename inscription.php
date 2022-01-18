@@ -75,7 +75,8 @@
             $subject = "Votre inscription sur dendo";
             $from="Michel@fermier.fr";
             $msg="
-            <p>Bonjour et merci pour votre inscription à notre site.</p>
+            <p>Bonjour et merci pour votre inscription à notre site.</p>:q
+            
             <p>Afin de finaliser votre inscription veuillez cliquer sur ce lien afin de confirmer votre inscription <a href='http://localhost:8889/tets/confirmation.php?token=" . $token . "'>inscription</a></p>
             ";
             $mailto = mail($to,$subject,$msg);
