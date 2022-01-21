@@ -7,7 +7,9 @@
     }
 
     if(isset($_GET['token'])){
-        $searchIfExist = $bdd->query('SELECT * FROM user WHERE token="' . $_GET['token'] . '"');
+        $searchIfExist = $bdd->prepare('SELECT * FROM user WHERE token=?');
+        $searchIfExist->bindValue(1, $_GET['token']);
+        $searchIfExist->execute();
         $test = $searchIfExist->fetch();
         if ($test['valide'] == 1){
             echo "Votre adresse à déjà été validée";
