@@ -8,9 +8,11 @@ try {
 }
 
 if(isset($_POST['connexion'])){
-    $username = $_POST['username'];
+    $username = htmlspecialchars($_POST['username']);
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $selectAccountReq = $bdd->query('SELECT * FROM user WHERE username = "' . $username . '"');
+    $selectAccountReq = $bdd->prepare('SELECT * FROM user WHERE username = ?');
+    $selectAccountReq->bindValue(1, $username);
+    $selectAccountReq->execute();
     $account = $selectAccountReq->fetch();
     if (password_verify($_POST['password'], $account['password'])){
         echo 'ok';
